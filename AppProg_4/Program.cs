@@ -34,6 +34,10 @@ namespace AppProg_4
             FillInCoefficients();
         }
 
+        /// <summary>
+        /// Обновление поля Prop.
+        /// </summary>
+        /// <returns>void</returns>
         public void AddAllProportions()
         {
             foreach (var proportion in Proportions)
@@ -42,6 +46,10 @@ namespace AppProg_4
             }
         }
 
+        /// <summary>
+        /// Приведение поля Prop к значению, равному 1.
+        /// </summary>
+        /// <returns>void</returns>
         public void FixProportions(double value)
         {
             var maxElementIndex = Proportions.LastIndexOf(Proportions.Max());
@@ -51,6 +59,10 @@ namespace AppProg_4
             AddAllProportions();
         }
 
+        /// <summary>
+        /// Высчитывание всех пропорций.
+        /// </summary>
+        /// <returns>void</returns>
         public void CalculateProportions()
         {
             foreach (var e in Sums)
@@ -62,6 +74,10 @@ namespace AppProg_4
             AddAllProportions();
         }
 
+        /// <summary>
+        /// Высчитывание всех сумм.
+        /// </summary>
+        /// <returns>void</returns>
         public void CalculateSums()
         {
             Console.Clear();
@@ -78,6 +94,10 @@ namespace AppProg_4
             Sum = Math.Round(Sum, 2);
         }
 
+        /// <summary>
+        /// Заполнение коэффициентов.
+        /// </summary>
+        /// <returns>void</returns>
         public void FillInCoefficients()
         {
             Console.Clear();
@@ -95,6 +115,10 @@ namespace AppProg_4
             }
         }
 
+        /// <summary>
+        /// Начальная инициализация коэффициентов.
+        /// </summary>
+        /// <returns>void</returns>
         public void InitializeCoefficients()
         {
             for (int i = 0; i < Rows; i++)
@@ -113,6 +137,10 @@ namespace AppProg_4
             }
         }
 
+        /// <summary>
+        /// Ввод числа.
+        /// </summary>
+        /// <returns>double</returns>
         public double InputCount()
         {
             double result = 0;
@@ -122,6 +150,11 @@ namespace AppProg_4
             }
             return result;
         }
+
+        /// <summary>
+        /// Ввод числа критериев.
+        /// </summary>
+        /// <returns>void</returns>
         public void EnterNumberOfCriterias()
         {
             Console.WriteLine("Введите количество критериев: ");
@@ -129,6 +162,10 @@ namespace AppProg_4
             Console.Clear();
         }
 
+        /// <summary>
+        /// Ввод критериев.
+        /// </summary>
+        /// <returns>void</returns>
         public void EnterCriterias()
         {
             for (var i = 0; i < NumberOfCriterias; i++)
@@ -140,6 +177,10 @@ namespace AppProg_4
             Console.Clear();
         }
 
+        /// <summary>
+        /// Отрисовка таблицы иерархии.
+        /// </summary>
+        /// <returns>void</returns>
         public void ShowHierarchy()
         {
             Console.Clear();
@@ -206,6 +247,7 @@ namespace AppProg_4
             }
         }
     }
+
     class Program
     {
         static void Main(string[] args)
