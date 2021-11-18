@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AppProg_4
 {
@@ -25,12 +26,29 @@ namespace AppProg_4
             Proportions.Capacity = NumberOfCriterias;
 
             Coefficients = new double[NumberOfCriterias, NumberOfCriterias];
-            Rows = Coefficients.GetUpperBound(0) + 1;    // количество строк
-            Columns = Coefficients.GetUpperBound(1) + 1;     // количество столбцов
+            Rows = Coefficients.GetUpperBound(0) + 1;
+            Columns = Coefficients.GetUpperBound(1) + 1;
             InitializeCoefficients();
 
             EnterCriterias();
             FillInCoefficients();
+        }
+
+        public void AddAllProportions()
+        {
+            foreach (var proportion in Proportions)
+            {
+                Prop += proportion;
+            }
+        }
+
+        public void FixProportions(double value)
+        {
+            var maxElementIndex = Proportions.LastIndexOf(Proportions.Max());
+            var temp = Proportions[maxElementIndex] + value;
+            Proportions[maxElementIndex] = temp;
+            Prop = 0;
+            AddAllProportions();
         }
 
         public void CalculateProportions()
@@ -39,10 +57,9 @@ namespace AppProg_4
             {
                 double proportion = 0;
                 proportion = Math.Round(e / Sum, 2);
-                Console.WriteLine("Пропорция: " + proportion);
                 Proportions.Add(proportion);
-                Prop += proportion;
             }
+            AddAllProportions();
         }
 
         public void CalculateSums()
@@ -55,11 +72,10 @@ namespace AppProg_4
                 {
                     sum += Coefficients[i, j];
                 }
-                Console.WriteLine("Сумма по первой строке: " + sum);
                 Sums.Add(sum);
                 Sum += sum;
             }
-            Console.WriteLine(Sum);
+            Sum = Math.Round(Sum, 2);
         }
 
         public void FillInCoefficients()
@@ -108,7 +124,7 @@ namespace AppProg_4
         }
         public void EnterNumberOfCriterias()
         {
-            Console.WriteLine("Введите количестов критериев: ");
+            Console.WriteLine("Введите количество критериев: ");
             NumberOfCriterias = (int)InputCount();
             Console.Clear();
         }
@@ -198,6 +214,11 @@ namespace AppProg_4
             hierarchy.ShowHierarchy();
             hierarchy.CalculateSums();
             hierarchy.CalculateProportions();
+            if (hierarchy.Prop != 1.0)
+            {
+                var temp = Math.Round(1.0 - hierarchy.Prop, 2);
+                hierarchy.FixProportions(temp);
+            }
             hierarchy.ShowHierarchy();
             Console.ReadLine();
         }
